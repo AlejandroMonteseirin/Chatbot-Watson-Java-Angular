@@ -2,7 +2,7 @@
     <div class="App">
       <aside class="sidebar">
         <section  *ngIf="!currentUser" class="join-chat">
-          <h2>Join Chat</h2>
+          <h2>Change name</h2>
           <form (ngSubmit)="addUser()">
             <input placeholder="Enter your username" type="text" name="username" [(ngModel)]="username" />
           </form>
@@ -19,7 +19,7 @@
       </aside>
       <main class="chat-window">
         <header class="chat-header">
-          <h1>Chat</h1>
+          <h1>ChatBot</h1>
           <span class="participants"></span>
         </header>
         <section class="chat-session">
@@ -32,7 +32,7 @@
         </section>
         <footer class="chat-footer">
           <form (ngSubmit)='sendMessage()'>
-            <input placeholder="Type a message. Hit Enter to send" type="text" name="message" [(ngModel)]="message">
+            <input placeholder="Escriba su consulta.Pulse Intro para enviar" type="text" name="message" [(ngModel)]="message">
           </form>
         </footer>
       </main>

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +7,14 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   title = 'client';
-  users=['ChatBotWapoWapo','Usted'];
-  messages=[{'sender':'ChatBotWapoWapo','text':'Saludos Bienvenido a su aprobado en cbd'}]
+  users=['ChatBotCBD','Usted'];
+  messages=[{'sender':'ChatBotCBD','text':'Saludos Bienvenido a su aprobado en cbd'}]
   message:any;
   username:any;
 
   addUser(){
-    console.log("Añadido")
+      console.log("Cambiado Nombre")
+      this.users.pop();
+      this.users.push(this.username);
   }
 }
