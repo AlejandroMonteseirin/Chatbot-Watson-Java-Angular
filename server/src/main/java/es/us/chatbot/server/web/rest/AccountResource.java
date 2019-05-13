@@ -1,55 +1,55 @@
 package es.us.chatbot.server.web.rest;
 
 
-//import es.us.chatbot.server.domain.User;
-//import es.us.chatbot.server.repository.UserRepository;
-//import es.us.chatbot.server.security.SecurityUtils;
-//import es.us.chatbot.server.service.MailService;
-//import es.us.chatbot.server.service.UserService;
-//import es.us.chatbot.server.service.dto.PasswordChangeDTO;
-//import es.us.chatbot.server.service.dto.UserDTO;
-//import es.us.chatbot.server.web.rest.errors.*;
-//import es.us.chatbot.server.web.rest.vm.KeyAndPasswordVM;
-//import es.us.chatbot.server.web.rest.vm.ManagedUserVM;
-//
-//import org.apache.commons.lang3.StringUtils;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.web.bind.annotation.*;
-//
-//import javax.servlet.http.HttpServletRequest;
-//import javax.validation.Valid;
-//import java.util.*;
-//
-///**
-// * REST controller for managing the current user's account.
-// */
-//@RestController
-//@RequestMapping("/api")
-//public class AccountResource {
-//
-//    private static class AccountResourceException extends RuntimeException {
-//        private AccountResourceException(String message) {
-//            super(message);
-//        }
-//    }
-//
-//    private final Logger log = LoggerFactory.getLogger(AccountResource.class);
-//
-//    private final UserRepository userRepository;
-//
-//    private final UserService userService;
-//
-//    private final MailService mailService;
-//
-//    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
-//
-//        this.userRepository = userRepository;
-//        this.userService = userService;
-//        this.mailService = mailService;
-//    }
-//
+import es.us.chatbot.server.domain.User;
+import es.us.chatbot.server.repository.UserRepository;
+import es.us.chatbot.server.security.SecurityUtils;
+import es.us.chatbot.server.service.MailService;
+import es.us.chatbot.server.service.UserService;
+import es.us.chatbot.server.service.dto.PasswordChangeDTO;
+import es.us.chatbot.server.service.dto.UserDTO;
+import es.us.chatbot.server.web.rest.errors.*;
+import es.us.chatbot.server.web.rest.vm.KeyAndPasswordVM;
+import es.us.chatbot.server.web.rest.vm.ManagedUserVM;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.*;
+
+/**
+ * REST controller for managing the current user's account.
+ */
+@RestController
+@RequestMapping("/api")
+public class AccountResource {
+
+    private static class AccountResourceException extends RuntimeException {
+        private AccountResourceException(String message) {
+            super(message);
+        }
+    }
+
+    private final Logger log = LoggerFactory.getLogger(AccountResource.class);
+
+    private final UserRepository userRepository;
+
+    private final UserService userService;
+
+    private final MailService mailService;
+
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+
+        this.userRepository = userRepository;
+        this.userService = userService;
+        this.mailService = mailService;
+    }
+
 //    /**
 //     * {@code POST  /register} : register the user.
 //     *
@@ -182,4 +182,4 @@ package es.us.chatbot.server.web.rest;
 //            password.length() >= ManagedUserVM.PASSWORD_MIN_LENGTH &&
 //            password.length() <= ManagedUserVM.PASSWORD_MAX_LENGTH;
 //    }
-//}
+}

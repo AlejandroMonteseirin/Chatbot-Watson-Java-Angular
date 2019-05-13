@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "context",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "firstMessageDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "lastMessageDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20190513155823",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "chat",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

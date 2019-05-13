@@ -16,23 +16,23 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-//
-///**
-// * Controller to authenticate users.
-// */
-//@RestController
-//@RequestMapping("/api")
-//public class UserJWTController {
-//
-//    private final TokenProvider tokenProvider;
-//
-//    private final AuthenticationManagerBuilder authenticationManagerBuilder;
-//
-//    public UserJWTController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
-//        this.tokenProvider = tokenProvider;
-//        this.authenticationManagerBuilder = authenticationManagerBuilder;
-//    }
-//
+
+/**
+ * Controller to authenticate users.
+ */
+@RestController
+@RequestMapping("/api")
+public class UserJWTController {
+
+    private final TokenProvider tokenProvider;
+
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+
+    public UserJWTController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+        this.tokenProvider = tokenProvider;
+        this.authenticationManagerBuilder = authenticationManagerBuilder;
+    }
+
 //    @PostMapping("/authenticate")
 //    public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginVM loginVM) {
 //
@@ -47,25 +47,25 @@ import javax.validation.Valid;
 //        httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 //        return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
 //    }
-//
-//    /**
-//     * Object to return as body in JWT Authentication.
-//     */
-//    static class JWTToken {
-//
-//        private String idToken;
-//
-//        JWTToken(String idToken) {
-//            this.idToken = idToken;
-//        }
-//
-//        @JsonProperty("id_token")
-//        String getIdToken() {
-//            return idToken;
-//        }
-//
-//        void setIdToken(String idToken) {
-//            this.idToken = idToken;
-//        }
-//    }
-//}
+
+    /**
+     * Object to return as body in JWT Authentication.
+     */
+    static class JWTToken {
+
+        private String idToken;
+
+        JWTToken(String idToken) {
+            this.idToken = idToken;
+        }
+
+        @JsonProperty("id_token")
+        String getIdToken() {
+            return idToken;
+        }
+
+        void setIdToken(String idToken) {
+            this.idToken = idToken;
+        }
+    }
+}
