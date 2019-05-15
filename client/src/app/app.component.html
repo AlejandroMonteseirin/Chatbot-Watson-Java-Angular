@@ -2,13 +2,13 @@
     <div class="App">
       <aside class="sidebar">
         <section  *ngIf="!currentUser" class="join-chat">
-          <h2>Change name</h2>
+          <h2>Cambiar su nombre</h2>
           <form (ngSubmit)="addUser()">
-            <input placeholder="Enter your username" type="text" name="username" [(ngModel)]="username" />
+            <input placeholder="Cambia tu nombre de usuario" type="text" name="username" [(ngModel)]="username" />
           </form>
         </section>
         <section class="online-members">
-          <h2>Usuarios en la Sala</h2>
+          <h2>Usuarios Conectados</h2>
           <ul class="user-list">
             <li *ngFor="let user of users">
               <span class="presence.online"></span>
@@ -31,7 +31,7 @@
           </ul>
         </section>
         <footer class="chat-footer">
-          <form (ngSubmit)='sendMessage()'>
+          <form (ngSubmit)='chat()'>
             <input placeholder="Escriba su consulta.Pulse Intro para enviar" type="text" name="message" [(ngModel)]="message">
           </form>
         </footer>
