@@ -12,6 +12,7 @@ import es.us.chatbot.server.service.dto.MessageDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,11 +21,9 @@ import java.util.stream.Collectors;
 @Transactional
 public class TalkService {
 
-    ChatRepository chatRepository;
-
-    UserService userService;
-
-    Assistant assistant;
+    private EbaySearchService ebaySearchService;
+    private ChatRepository chatRepository;
+    private Assistant assistant;
 
     private static Map<Long, Context> contextCache = new HashMap<>(); // Guardo los contextos asi porque no da tiempo a hacerlo bien
 
@@ -41,10 +40,9 @@ public class TalkService {
         amazonResults2.put("ASUS K541UV-GQ650T - 740€", "https://www.amazon.es/ASUS-K541UV-GQ650T-Ordenador-Portátil-chocolate/dp/B01MTGBEWA");
     }
 
-    public TalkService(ChatRepository chatRepository, UserService userService) {
+    public TalkService(ChatRepository chatRepository, EbaySearchService ebaySearchService) {
         this.chatRepository = chatRepository;
-        this.userService = userService;
-
+        this.ebaySearchService = ebaySearchService;
 
         IamOptions options = new IamOptions.Builder()
             .apiKey("QHr9S5hFkVNU8LUVOunTh4jjIYimu7OqCTgh2vcyceud")
@@ -54,7 +52,7 @@ public class TalkService {
         this.assistant.setEndPoint("https://gateway-lon.watsonplatform.net/assistant/api");
     }
 
-    public MessageDTO talk(MessageDTO messageDTO) {
+    public MessageDTO talk(MessageDTO messageDTO) throws IOException {
         Chat chat;
 
         if (messageDTO.getChatId() == null || messageDTO.getChatId() == -1) {
@@ -93,6 +91,7 @@ public class TalkService {
         Optional<Object> cpu = Optional.ofNullable(response.getContext().get("cpu"));
         Optional<Object> ram = Optional.ofNullable(response.getContext().get("ram"));
         Optional<Object> gpu = Optional.ofNullable(response.getContext().get("gpu"));
+        Optional<Object> currency = Optional.ofNullable(response.getContext().get("currency"));
 
         opciones.add(cpu);
         opciones.add(ram);
@@ -100,22 +99,45 @@ public class TalkService {
 
         String text = "";
 
-        if (!opciones.stream().allMatch(Optional::isPresent) && opciones.stream().anyMatch(Optional::isPresent)){
-            text += "Hasta ahora, he encontrado estos resultados: <br> " +
-                amazonResults1.keySet().stream().map(k -> "<a href="+amazonResults1.get(k)+" target='_blank'>"+k+"</a>").collect(Collectors.joining("<br>"));
+        if (opciones.stream().anyMatch(Optional::isPresent)) {
+            Map<String, String> amazonResults = this.ebaySearchService.ebaySearch(cpu.orElse("") + " " +
+                ram.orElse("") + " " + gpu.orElse(""), (Double) currency.orElse(999999.0));
 
-            text += "<br><br>";
+            if (opciones.stream().allMatch(Optional::isPresent)) {
+                text += response.getOutput().getText().stream().collect(Collectors.joining("<br>"));
+
+                text += "<br><br>";
+
+                text += "He encontrado estos resultados: <br> " + getResultLinks(amazonResults);
+
+            } else {
+                text += "Hasta ahora, he encontrado estos resultados: <br> " + getResultLinks(amazonResults);
+
+                text += "<br>";
+
+                text += response.getOutput().getText().stream().collect(Collectors.joining("<br>"));
+            }
+        } else {
+            text += response.getOutput().getText().stream().collect(Collectors.joining("<br>"));
         }
 
-        text += response.getOutput().getText().stream().collect(Collectors.joining("<br>"));
 
-        if (opciones.stream().allMatch(Optional::isPresent)){
-            text += "<br><br>";
 
-            text += "He encontrado estos resultados: <br> " +
-                amazonResults2.keySet().stream().map(k -> "<a href="+amazonResults2.get(k)+" target='_blank'>"+k+"</a>").collect(Collectors.joining("<br>"));
-        }
 
         return new MessageDTO(text, chat.getId());
     }
+
+    String getResultLinks(Map<String, String> results) {
+        if (results.size() < 3) {
+            return "Lo siento, no he encontrado resultados con estas características <br>";
+        }
+
+        String res = "";
+        for (String link : results.keySet()) {
+            res += "<a href='" + link + "' target='_blank'>" + results.get(link) + "</a><br>";
+        }
+
+        return res;
+    }
 }
+

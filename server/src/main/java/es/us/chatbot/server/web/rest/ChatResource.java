@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -120,7 +121,7 @@ public class ChatResource {
     }
 
     @PostMapping("/chats/talk")
-    public ResponseEntity<MessageDTO> talk(@RequestBody MessageDTO messageDTO) {
+    public ResponseEntity<MessageDTO> talk(@RequestBody MessageDTO messageDTO) throws IOException {
         return ResponseEntity.ok(this.talkService.talk(messageDTO));
     }
 }
