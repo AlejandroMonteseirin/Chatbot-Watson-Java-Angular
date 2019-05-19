@@ -120,7 +120,7 @@ public class ChatResource {
     }
 
     @PostMapping("/chats/talk")
-    public ResponseEntity<MessageDTO> talk(MessageDTO messageDTO) {
+    public ResponseEntity<MessageDTO> talk(@RequestBody MessageDTO messageDTO) {
         return ResponseEntity.ok(this.talkService.talk(messageDTO));
     }
 }
