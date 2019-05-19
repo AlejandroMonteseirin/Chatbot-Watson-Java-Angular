@@ -2,9 +2,9 @@
     <div class="App">
       <aside class="sidebar">
         <section  *ngIf="!currentUser" class="join-chat">
-          <h2>Cambiar su nombre</h2>
+          <h2>Nuevo usuario</h2>
           <form (ngSubmit)="addUser()">
-            <input placeholder="Cambia tu nombre de usuario" type="text" name="username" [(ngModel)]="username" />
+            <input placeholder="Nuevo nombre" type="text" name="username" [(ngModel)]="username" />
           </form>
         </section>
         <section class="online-members">

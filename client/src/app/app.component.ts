@@ -14,7 +14,7 @@ export class AppComponent {
 
   title = 'client';
   users=['ChatBotCBD','Usted'];
-  messages=[{'sender':'ChatBotCBD','text':'Saludos Bienvenido a su aprobado en cbd'}]
+  messages=[{'sender':'ChatBotCBD','text':'Saludos bienvenido a ChatBotCBD'}]
   message:any;
   username:any;
   id=-1;
@@ -22,11 +22,21 @@ export class AppComponent {
       console.log("Cambiado Nombre")
       this.users.pop();
       this.users.push(this.username);
+      this.messages.push({'sender':'ChatBotCBD','text':'Reiniciando conversacion...'})
+      this.delay(1500).then(()=>{
+        this.messages.push({'sender':'ChatBotCBD','text':'Saludos '+this.users[1]+" bienvenido al ChatBotCBD"})
+      });
+
+
   }
+  private delay(ms: number)
+    {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
   chat(){
     this.messages.push({'sender':this.users[1],'text':this.message});
     console.log(this.id);
-    this.http.post('http://localhost:8080/api/chats/talk?chatId='+this.id+'&text='+this.message,{}).subscribe((data)=>{
+    this.http.post('http://localhost:8080/api/chats/talk',{'chatId':this.id,'text':this.message}).subscribe((data)=>{
       this.message='';
       console.log(data)
       this.id=data['chatId'];
@@ -34,4 +44,6 @@ export class AppComponent {
 
     });
   }
+
+
 }
