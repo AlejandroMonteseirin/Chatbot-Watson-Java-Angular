@@ -24,6 +24,8 @@ public class TalkService {
 
     UserService userService;
 
+    Assistant assistant;
+
     private static Map<Long, Context> contextCache = new HashMap<>(); // Guardo los contextos asi porque no da tiempo a hacerlo bien
 
     private static Map<String, String> amazonResults1 = new HashMap<>();
