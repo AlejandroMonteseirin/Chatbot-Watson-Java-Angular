@@ -10,10 +10,42 @@
     <name>Server</name>
 
     <repositories>
+        <repository>
+            <snapshots>
+                <enabled>
+                    false
+                </enabled>
+            </snapshots>
+            <id>
+                bintray-ibm-cloud-sdks-ibm-cloud-sdk-repo
+            </id>
+            <name>
+                bintray
+            </name>
+            <url>
+                https://dl.bintray.com/ibm-cloud-sdks/ibm-cloud-sdk-repo
+            </url>
+        </repository>
         <!-- jhipster-needle-maven-repository -->
     </repositories>
 
     <pluginRepositories>
+        <pluginRepository>
+            <snapshots>
+                <enabled>
+                    false
+                </enabled>
+            </snapshots>
+            <id>
+                bintray-ibm-cloud-sdks-ibm-cloud-sdk-repo
+            </id>
+            <name>
+                bintray-plugins
+            </name>
+            <url>
+                https://dl.bintray.com/ibm-cloud-sdks/ibm-cloud-sdk-repo
+            </url>
+        </pluginRepository>
         <!-- jhipster-needle-maven-plugin-repository -->
     </pluginRepositories>
 
@@ -304,7 +336,7 @@
         <!-- jhipster-needle-maven-add-dependency -->
         <dependency>
             <groupId>com.ibm.watson</groupId>
-            <artifactId>ibm-watson</artifactId>
+            <artifactId>assistant</artifactId>
             <version>7.0.0</version>
         </dependency>
     </dependencies>
