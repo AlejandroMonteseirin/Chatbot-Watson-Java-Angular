@@ -26,6 +26,7 @@ export class AppComponent {
       this.delay(1500).then(()=>{
         this.messages.push({'sender':'ChatBotCBD','text':'Saludos '+this.users[1]+" bienvenido al ChatBotCBD"})
       });
+      this.id=-1;
 
 
   }

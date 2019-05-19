@@ -26,7 +26,7 @@
           <ul class="message-list">
             <li class="user-message" *ngFor="let message of messages">
               <span class="user-id">{{ message.sender }}</span>
-              <span>{{ message.text }}</span>
+              <span innerHTML="{{ message.text }}"></span>
             </li>
           </ul>
         </section>
